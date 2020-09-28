@@ -3,7 +3,6 @@
 #include <iostream>
 #include <cmath>
 #include <random>
-#include <map>
 #include <sstream>
 
 using namespace std;
@@ -105,6 +104,7 @@ bool List::Read(FILE* file, string* s) {
     fread(buf, 1, size, file);
     buf[size] = '\0';
     *s = string(buf);
+    delete[]buf;
     return true;
 }
 
@@ -163,6 +163,7 @@ void List::Deserialize(FILE* file)
         ivec[i].push_back(first.str());
         ivec[i].push_back(second.str());
         this->Add(node->data);
+        delete node;
 
     }
 
