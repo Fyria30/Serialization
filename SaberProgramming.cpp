@@ -243,54 +243,57 @@ int main()
     cout << "---data after ---" << endl << data << "\n \n \n";
 
 
-    int a = -1248124;
+    int a = -9;
     cout << "Number: " << a << endl;
     own_int_to_binary(a);
 }
 
 
-
 void own_int_to_binary(int n) // first bit is a sign then binary numbers
 {
-    int size = (sizeof(int) - 1) * 8;
+
+    int size = sizeof(int) * 8;
     char* a = new char[size];
-
-    //Sign
+    int sum = n;
+    char one = '1';
+    char two = '0';
+ //Sign
     if (n < 0) {
-        cout << "1 | ";
         n = -n;
-    }
-    else cout << "0 | ";
+        one = '0';
+        two = '1';
+   }
 
-    // Zero
-    if (n == 0) {
-        cout << '0' << endl;
-        delete[]a;
-        return;
-    }
-
-    //Algorithm
+ //Algorithm
     for (int i = size - 1; i >= 0; i--)
     {
         if (n / pow(2, i) >= 1) {
             n -= pow(2, i);
-            a[size - 1 - i] = '1';
+            a[size - 1 - i] = one;
         }
         else
-            a[size - 1 - i] = '0';
+            a[size - 1 - i] = two;
     }
 
-    //Display;
-    int i = 0;
-    while (a[i] != '1')
-        i++;
+    if (one == '0') {
+    for (int i = size - 1; i >= 0; i--) {  
+        if (a[i] == '0'){
+            a[i] = '1';
+            break;
+        }
+        else
+            a[i] = '0';    
+    }
+    }           
 
-    for (i; i < size; i++)
-        cout << a[i] << " ";
+for (int i = 0; i < size; i++)
+    cout << a[i] << " ";
 
-    cout << endl;
-    delete[]a;
+cout << endl;
+delete[]a;
 }
+
+
 
 void RemovePups(char* str)
 {
